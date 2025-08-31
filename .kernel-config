@@ -6,6 +6,8 @@ scripts/config --enable CONFIG_MEDIA_CONTROLLER     # Media Controller API（デ
 scripts/config --enable CONFIG_VIDEO_DEV            # V4L2 デバイスノード (/dev/video*) を扱う基本ドライバ
 scripts/config --enable CONFIG_VIDEO_V4L2           # V4L2 コア機能を有効化
 scripts/config --enable CONFIG_MEDIA_TEST_SUPPORT   # テストドライバ群の有効化
+scripts/config --enable CONFIG_V4L_TEST_DRIVERS     # V4L テストドライバ群のトグル（vivid を見せる親メニュー）
+scripts/config --enable CONFIG_FB                   # フレームバッファサポートを有効化（vivid が依存している）
 scripts/config --module CONFIG_VIDEO_VIVID          # vivid 仮想ビデオドライバ（テスト用の仮想カメラ）をモジュールとしてビルド
 
 # --- USB カメラ・USB/IP 関連 ---
