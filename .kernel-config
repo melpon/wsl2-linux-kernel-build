@@ -1,0 +1,21 @@
+# カーネルの設定を変更する場合はここに追記する
+
+# --- V4L2 基盤とテスト用ドライバ ---
+scripts/config --enable CONFIG_MEDIA_SUPPORT        # マルチメディア（V4L2 など）のサブシステムを有効化
+scripts/config --enable CONFIG_MEDIA_CONTROLLER     # Media Controller API（デバイス間の接続管理）を有効化
+scripts/config --enable CONFIG_VIDEO_DEV            # V4L2 デバイスノード (/dev/video*) を扱う基本ドライバ
+scripts/config --enable CONFIG_VIDEO_V4L2           # V4L2 コア機能を有効化
+scripts/config --enable CONFIG_MEDIA_TEST_SUPPORT   # テストドライバ群の有効化
+scripts/config --module CONFIG_VIDEO_VIVID          # vivid 仮想ビデオドライバ（テスト用の仮想カメラ）をモジュールとしてビルド
+
+# --- USB カメラ・USB/IP 関連 ---
+scripts/config --enable CONFIG_USB_SUPPORT          # USB サブシステム全体を有効化
+scripts/config --enable CONFIG_USB                  # USB コアサポートを有効化
+scripts/config --enable CONFIG_USB_XHCI_HCD         # USB3 (xHCI) ホストコントローラドライバを有効化
+scripts/config --module CONFIG_USB_VIDEO_CLASS      # UVC (USB Video Class) ドライバをモジュールとしてビルド（USB カメラ用）
+scripts/config --module CONFIG_USBIP_CORE           # USB/IP のコア部分をモジュールとしてビルド
+scripts/config --module CONFIG_USBIP_VHCI_HCD       # USB/IP 用の仮想ホストコントローラ（受け側）をモジュールとしてビルド
+
+scripts/config --disable CONFIG_X86_X32             # x32 ABI (x86_64上で32bitポインタを使う特殊モード) を無効化
+                                                    # binutils にサポートが無いため警告が出る。WSL2では不要なのでOFFにする。
+
